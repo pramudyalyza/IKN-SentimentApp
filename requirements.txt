@@ -73,7 +73,6 @@ mistune==3.0.2
 murmurhash==1.0.10
 mysql==0.0.3
 mysql-connector-python==9.0.0
-mysqlclient==2.2.4
 narwhals==1.4.2
 nbclient==0.10.0
 nbconvert==7.16.4
