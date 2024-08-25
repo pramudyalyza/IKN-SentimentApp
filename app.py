@@ -69,8 +69,8 @@ def main():
 
         with st.spinner('Processing...'):
             if st.button("Predict"):
-                errorId, cleanOutput = process_text(input_text)
-                predict_text(errorId, cleanOutput)
+                errorId, cleanOutput, errorMessage = process_text(input_text)
+                predict_text(errorId, cleanOutput, errorMessage)
 
 if __name__ == '__main__':
     main()
