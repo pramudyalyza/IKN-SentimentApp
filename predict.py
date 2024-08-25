@@ -32,11 +32,12 @@ def count_tag(text, tag, listCommon, positive=True):
     else:
         return sum(-1 for word, tag_ in words_tags if tag_ == tag and word in dict(listCommon))
     
-def predict_text(errorId, cleanOutput):
+def predict_text(errorId, cleanOutput, errorMessage):
     if errorId == 1:
         st.error("Oops! The text you entered is either too short, contains only numbers, symbols, stopwords, or is mostly made up of HTML code. Please try entering a longer and more meaningful text.")
         return
     elif errorId == 2:
+        st.error(errorMessage)
         st.error("Oops! An unexpected error occurred")
         return
     else:
