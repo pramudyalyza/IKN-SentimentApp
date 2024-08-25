@@ -96,12 +96,12 @@ def process_text(text):
         df['taggedStopClean'] = df['taggedStop'].apply(remove_pos_tags)
 
         if df['taggedStopClean'].iloc[0] == '':
-            return 1, None
+            return 1, None, None
     
     except Exception as e:
-        return 2, None
+        return 2, None, e
 
     res = df[['textDisplay', 'taggedStopClean', 'taggedStop']]
     res = res.rename(columns = {'textDisplay':'fullText', 'taggedStopClean':'taggedTextClean', 'taggedStop':'taggedText'})
 
-    return 0, res
+    return 0, res, None
