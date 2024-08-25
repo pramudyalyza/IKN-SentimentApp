@@ -17,6 +17,9 @@ from indoNLP.preprocessing import emoji_to_words
 from indoNLP.preprocessing import replace_word_elongation
 warnings.filterwarnings('ignore')
 
+nltk.download('punkt')
+nltk.download('stopwords')
+
 with open('Files/Requirement/typoList.json', 'r') as file:
     typoList = json.load(file)
 
