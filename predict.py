@@ -13,17 +13,17 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 warnings.filterwarnings('ignore')
 
-dataVocabRF = joblib.load('Files/Requirement/RF/PoSVocabRF.pkl')
-JJ_NegRF, NN_NegRF, VB_NegRF, RB_NegRF, FW_NegRF = dataVocabRF['JJ_Neg'], dataVocabRF['NN_Neg'], dataVocabRF['VB_Neg'], dataVocabRF['RB_Neg'], dataVocabRF['FW_Neg']
-JJ_PosRF, NN_PosRF, VB_PosRF, RB_PosRF, FW_PosRF = dataVocabRF['JJ_Pos'], dataVocabRF['NN_Pos'], dataVocabRF['VB_Pos'], dataVocabRF['RB_Pos'], dataVocabRF['FW_Pos']
+RFVocab = joblib.load('Files/Requirement/RF/RFVocab.pkl')
+JJ_NegRF, NN_NegRF, VB_NegRF, RB_NegRF, FW_NegRF = RFVocab['JJ_Neg'], RFVocab['NN_Neg'], RFVocab['VB_Neg'], RFVocab['RB_Neg'], RFVocab['FW_Neg']
+JJ_PosRF, NN_PosRF, VB_PosRF, RB_PosRF, FW_PosRF = RFVocab['JJ_Pos'], RFVocab['NN_Pos'], RFVocab['VB_Pos'], RFVocab['RB_Pos'], RFVocab['FW_Pos']
 
-dataVocabKNN = joblib.load('Files/Requirement/KNN/PoSVocabKNN.pkl')
-JJ_NegKNN, NN_NegKNN, VB_NegKNN, RB_NegKNN, FW_NegKNN = dataVocabKNN['JJ_Neg'], dataVocabKNN['NN_Neg'], dataVocabKNN['VB_Neg'], dataVocabKNN['RB_Neg'], dataVocabKNN['FW_Neg']
-JJ_PosKNN, NN_PosKNN, VB_PosKNN, RB_PosKNN, FW_PosKNN = dataVocabKNN['JJ_Pos'], dataVocabKNN['NN_Pos'], dataVocabKNN['VB_Pos'], dataVocabKNN['RB_Pos'], dataVocabKNN['FW_Pos']
+SVMVocab = joblib.load('Files/Requirement/SVM/SVMVocab.pkl')
+JJ_NegSVM, NN_NegSVM, VB_NegSVM, RB_NegSVM, FW_NegSVM = SVMVocab['JJ_Neg'], SVMVocab['NN_Neg'], SVMVocab['VB_Neg'], SVMVocab['RB_Neg'], SVMVocab['FW_Neg']
+JJ_PosSVM, NN_PosSVM, VB_PosSVM, RB_PosSVM, FW_PosSVM = SVMVocab['JJ_Pos'], SVMVocab['NN_Pos'], SVMVocab['VB_Pos'], SVMVocab['RB_Pos'], SVMVocab['FW_Pos']
 
-dataVocabDT = joblib.load('Files/Requirement/DT/PoSVocabDT.pkl')
-JJ_NegDT, NN_NegDT, VB_NegDT, RB_NegDT, FW_NegDT = dataVocabDT['JJ_Neg'], dataVocabDT['NN_Neg'], dataVocabDT['VB_Neg'], dataVocabDT['RB_Neg'], dataVocabDT['FW_Neg']
-JJ_PosDT, NN_PosDT, VB_PosDT, RB_PosDT, FW_PosDT = dataVocabDT['JJ_Pos'], dataVocabDT['NN_Pos'], dataVocabDT['VB_Pos'], dataVocabDT['RB_Pos'], dataVocabDT['FW_Pos']
+LRVocab = joblib.load('Files/Requirement/LR/LRVocab.pkl')
+JJ_NegLR, NN_NegLR, VB_NegLR, RB_NegLR, FW_NegLR = LRVocab['JJ_Neg'], LRVocab['NN_Neg'], LRVocab['VB_Neg'], LRVocab['RB_Neg'], LRVocab['FW_Neg']
+JJ_PosLR, NN_PosLR, VB_PosLR, RB_PosLR, FW_PosLR = LRVocab['JJ_Pos'], LRVocab['NN_Pos'], LRVocab['VB_Pos'], LRVocab['RB_Pos'], LRVocab['FW_Pos']
 
 def count_tag(text, tag, listCommon, positive=True):
     words_tags = [word.split('/') for word in text.split()]
@@ -41,17 +41,17 @@ def predict_text(errorId, cleanOutput, errorMessage):
         st.error("Oops! An unexpected error occurred")
         return
     else:
-        modelRF = joblib.load('Files/Requirement/RF/RF-NoHuman.pkl')
-        modelKNN = joblib.load('Files/Requirement/KNN/KNN-NoHuman.pkl')
-        modelDT = joblib.load('Files/Requirement/DT/DT-NoHuman.pkl')
+        modelRF = joblib.load('Files/Requirement/RF/RFModel.pkl')
+        modelSVM = joblib.load('Files/Requirement/SVM/SVMModel.pkl')
+        modelLR = joblib.load('Files/Requirement/LR/LRModel.pkl')
         
-        scalerRF = joblib.load('Files/Requirement/RF/scalerRF.pkl')
-        scalerKNN = joblib.load('Files/Requirement/KNN/scalerKNN.pkl')
-        scalerDT = joblib.load('Files/Requirement/DT/scalerDT.pkl')
+        scalerRF = joblib.load('Files/Requirement/RF/RFScaler.pkl')
+        scalerSVM = joblib.load('Files/Requirement/SVM/SVMScaler.pkl')
+        scalerLR = joblib.load('Files/Requirement/LR/LRScaler.pkl')
         
-        vectorizerRF = joblib.load('Files/Requirement/RF/tfidf_vectorizerRF.pkl')
-        vectorizerKNN = joblib.load('Files/Requirement/KNN/tfidf_vectorizerKNN.pkl')
-        vectorizerDT = joblib.load('Files/Requirement/DT/tfidf_vectorizerDT.pkl')
+        vectorizerRF = joblib.load('Files/Requirement/RF/RFVectorizer.pkl')
+        vectorizerSVM = joblib.load('Files/Requirement/SVM/SVMVectorizer.pkl')
+        vectorizerLR = joblib.load('Files/Requirement/LR/LRVectorizer.pkl')
 
         def process_data(model, scaler, vectorizer, cleanOutput, tag_dict):
             for tag, listCommon, colName in tag_dict:
@@ -61,11 +61,35 @@ def predict_text(errorId, cleanOutput, errorMessage):
             
             scaled_data = scaler.transform(cleanOutput[['CountTotal']])
             vectorized_data = vectorizer.transform(cleanOutput['taggedTextClean']).toarray()
-            vectorized_data = vectorized_data[:, :5186]
+            vectorized_data = vectorized_data[:, :2467]
             
             return np.hstack((vectorized_data, scaled_data))
         
-        tag_columns = [
+        tag_columnsLR = [
+            ('JJ', JJ_NegLR, 'CountJJ_Negatif'),
+            ('NN', NN_NegLR, 'CountNN_Negatif'),
+            ('VB', VB_NegLR, 'CountVB_Negatif'),
+            ('RB', RB_NegLR, 'CountRB_Negatif'),
+            ('FW', FW_NegLR, 'CountFW_Negatif'),
+            ('JJ', JJ_PosLR, 'CountJJ_Positif'),
+            ('NN', NN_PosLR, 'CountNN_Positif'),
+            ('VB', VB_PosLR, 'CountVB_Positif'),
+            ('RB', RB_PosLR, 'CountRB_Positif'),
+            ('FW', FW_PosLR, 'CountFW_Positif')]
+        
+        tag_columnsSVM = [
+            ('JJ', JJ_NegSVM, 'CountJJ_Negatif'),
+            ('NN', NN_NegSVM, 'CountNN_Negatif'),
+            ('VB', VB_NegSVM, 'CountVB_Negatif'),
+            ('RB', RB_NegSVM, 'CountRB_Negatif'),
+            ('FW', FW_NegSVM, 'CountFW_Negatif'),
+            ('JJ', JJ_PosSVM, 'CountJJ_Positif'),
+            ('NN', NN_PosSVM, 'CountNN_Positif'),
+            ('VB', VB_PosSVM, 'CountVB_Positif'),
+            ('RB', RB_PosSVM, 'CountRB_Positif'),
+            ('FW', FW_PosSVM, 'CountFW_Positif')]
+        
+        tag_columnsRF = [
             ('JJ', JJ_NegRF, 'CountJJ_Negatif'),
             ('NN', NN_NegRF, 'CountNN_Negatif'),
             ('VB', VB_NegRF, 'CountVB_Negatif'),
@@ -77,16 +101,16 @@ def predict_text(errorId, cleanOutput, errorMessage):
             ('RB', RB_PosRF, 'CountRB_Positif'),
             ('FW', FW_PosRF, 'CountFW_Positif')]
         
-        x_RF = process_data(modelRF, scalerRF, vectorizerRF, cleanOutput.copy(), tag_columns)
-        x_KNN = process_data(modelKNN, scalerKNN, vectorizerKNN, cleanOutput.copy(), tag_columns)
-        x_DT = process_data(modelDT, scalerDT, vectorizerDT, cleanOutput.copy(), tag_columns)
+        x_LR = process_data(modelLR, scalerLR, vectorizerLR, cleanOutput.copy(), tag_columnsLR)
+        x_SVM = process_data(modelSVM, scalerSVM, vectorizerSVM, cleanOutput.copy(), tag_columnsSVM)
+        x_RF = process_data(modelRF, scalerRF, vectorizerRF, cleanOutput.copy(), tag_columnsRF)
 
+        y_predLR = modelLR.predict(x_LR)
+        y_predSVM = modelSVM.predict(x_SVM)
         y_predRF = modelRF.predict(x_RF)
-        y_predKNN = modelKNN.predict(x_KNN)
-        y_predDT = modelDT.predict(x_DT)
 
         label_mapping = {1: "Positive", 0: "Negative"}
-        votes = [label_mapping[y_predRF[0]], label_mapping[y_predKNN[0]], label_mapping[y_predDT[0]]]
+        votes = [label_mapping[y_predLR[0]], label_mapping[y_predSVM[0]], label_mapping[y_predRF[0]]]
         majority_vote = max(set(votes), key=votes.count)
         
         st.success(majority_vote)
